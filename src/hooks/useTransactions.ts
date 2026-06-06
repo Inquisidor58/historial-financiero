@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 import type { Transaction, TransactionFormData, Category, MonthlySummary } from '../lib/types';
 import toast from 'react-hot-toast';
 
@@ -7,6 +8,7 @@ export function useTransactions(year: number, month: number, categoryFilter?: st
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
 
   const startDate = `${year}-${String(month).padStart(2, '0')}-01`;
   const endDate = new Date(year, month, 0).toISOString().split('T')[0];
@@ -57,7 +59,11 @@ export function useTransactions(year: number, month: number, categoryFilter?: st
   );
 
   const addTransaction = async (data: TransactionFormData) => {
-    const { error } = await supabase.from('transactions').insert([data]);
+    if (!user) {
+      toast.error('Debes iniciar sesión');
+      return false;
+    }
+    const { error } = await supabase.from('transactions').insert([{ ...data, user_id: user.id }]);
     if (error) {
       toast.error('Error al crear transacción');
       return false;
