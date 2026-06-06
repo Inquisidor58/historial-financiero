@@ -30,7 +30,7 @@ CREATE TABLE transactions (
   user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE,
   type TEXT NOT NULL CHECK (type IN ('income', 'expense')),
   category TEXT NOT NULL,
-  amount DECIMAL(12, 2) NOT NULL CHECK (amount > 0),
+  amount INTEGER NOT NULL CHECK (amount > 0),
   description TEXT DEFAULT '',
   date DATE NOT NULL DEFAULT CURRENT_DATE,
   created_at TIMESTAMPTZ DEFAULT now()

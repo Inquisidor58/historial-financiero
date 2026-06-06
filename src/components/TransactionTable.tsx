@@ -18,7 +18,7 @@ export default function TransactionTable({
   categories,
 }: Props) {
   const formatCurrency = (n: number) =>
-    new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(n);
+    new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
 
   const uniqueCategories = [...new Set(transactions.map((t) => t.category))];
 
@@ -61,7 +61,7 @@ export default function TransactionTable({
               transactions.map((t) => (
                 <tr key={t.id} className="border-t border-gray-100 hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3 whitespace-nowrap">
-                    {new Date(t.date).toLocaleDateString('es-CL')}
+                    {new Date(t.date).toLocaleDateString('es-CO')}
                   </td>
                   <td className="px-4 py-3">{t.category}</td>
                   <td className="px-4 py-3 hidden sm:table-cell text-gray-600 max-w-[200px] truncate">

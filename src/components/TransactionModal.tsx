@@ -108,8 +108,8 @@ export default function TransactionModal({ isOpen, onClose, onSave, transaction,
             <input
               type="number"
               required
-              min="0.01"
-              step="0.01"
+              min="1"
+              step="1"
               value={form.amount || ''}
               onChange={(e) => setForm({ ...form, amount: parseFloat(e.target.value) || 0 })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"

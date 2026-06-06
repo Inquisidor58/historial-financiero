@@ -30,7 +30,7 @@ export default function KpiCards({ summary }: Props) {
   ];
 
   const formatCurrency = (n: number) =>
-    new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', maximumFractionDigits: 0 }).format(n);
+    new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
